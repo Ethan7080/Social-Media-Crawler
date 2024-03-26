@@ -59,6 +59,14 @@ class XhsCsvStoreImplement(AbstractStore):
         Returns:
 
         """
+        def meets_criteria(item):
+            # Example criteria: Check if 'liked_count' is greater than 20 and comment_count is greater than 10
+            return int(item.get('liked_count', 0)) > 20 and int(item.get('comment_count', 0)) > 10
+
+        # Check if save_item meets the criteria
+        if not meets_criteria(content_item):
+            return  # If it doesn't meet the criteria, exit the function and do not save to CSV
+            
         await self.save_data_to_csv(save_item=content_item, store_type="contents")
 
     async def store_comment(self, comment_item: Dict):
