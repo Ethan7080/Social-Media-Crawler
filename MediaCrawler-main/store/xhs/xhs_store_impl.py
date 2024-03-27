@@ -12,11 +12,67 @@ from typing import Dict
 import aiofiles
 from tortoise.contrib.pydantic import pydantic_model_creator
 
+from config.base_config import KEYWORDS
 from base.base_crawler import AbstractStore
 from tools import utils
 from var import crawler_type_var
 
+class XhsTxtStoreImplement(AbstractStore):
+    def __init__(self):
+        self.file_path : str = "data/xhs"
+        self.post_counter = 0  # To keep track of the number of posts processed
 
+    async def store_content(self, content_item: Dict):
+        # Check if the like count is greater than 100 before storing
+        if int(content_item.get('liked_count', 0)) > int(100):
+            self.post_counter += 1  # Increment the counter when storing content
+            formatted_content = self._format_content_item(content_item)
+            await self._write_to_file(formatted_content, 'content')
+
+    async def store_comment(self, comment_item: Dict):
+          # Increment the counter when storing comment
+        formatted_comment = self._format_comment_item(comment_item)
+        await self._write_to_file(formatted_comment, 'comment')
+
+    async def _write_to_file(self, data: str, data_type: str):
+        # Create a unique filename for each entry
+        filename = f"{crawler_type_var.get()}_{data_type}_{utils.get_current_date()}_{KEYWORDS}.txt"
+        full_path = f"{self.file_path}/{filename}"
+        # Write the formatted data to the text file asynchronously
+        async with aiofiles.open(full_path, 'a', encoding='utf-8') as file:
+            await file.write(data + '\n\n')  # Ensure each entry is separated by a new line
+
+    def _format_content_item(self, item: Dict) -> str:
+        # Generate a string representation of the content item
+        self.post_counter += 1
+        formatted_lines = [
+            f"Post Number: {self.post_counter}",
+            f"Type: {item.get('type', 'N/A')}",
+            f"Title: {item.get('title', 'N/A')}",
+            f"Description: {item.get('desc', 'N/A')}",
+            f"Nickname: {item.get('nickname', 'N/A')}",
+            f"Liked Count: {item.get('liked_count', 'N/A')}",
+            f"Collected Count: {item.get('collected_count', 'N/A')}",
+            f"Comment Count: {item.get('comment_count', 'N/A')}",
+            f"Share Count: {item.get('share_count', 'N/A')}",
+            f"Last Modify Timestamp: {item.get('last_modify_ts', 'N/A')}",
+            f"Note URL: {item.get('note_url', 'N/A')}"
+        ]
+        return '\n'.join(formatted_lines)
+
+    def _format_comment_item(self, item: Dict) -> str:
+        # Generate a string representation of the comment item
+        formatted_lines = [
+            f"Comment Number: {self.post_counter}",
+            f"Note ID: {item.get('note_id', 'N/A')}",
+            f"Create Time: {item.get('create_time', 'N/A')}",
+            f"IP Location: {item.get('ip_location', 'N/A')}",
+            f"Content: {item.get('content', 'N/A')}",
+            f"Nickname: {item.get('nickname', 'N/A')}",
+            f"Sub Comment Count: {item.get('sub_comment_count', 'N/A')}",
+            f"Last Modify Timestamp: {item.get('last_modify_ts', 'N/A')}"
+        ]
+        return '\n'.join(formatted_lines)
 class XhsCsvStoreImplement(AbstractStore):
     csv_store_path: str = "data/xhs"
 
@@ -177,6 +233,13 @@ class XhsJsonStoreImplement(AbstractStore):
         Returns:
 
         """
+        def meets_criteria(item):
+            # Example criteria: Check if 'liked_count' is greater than 20 and comment_count is greater than 10
+            return int(item.get('liked_count', 0)) > 20 and int(item.get('comment_count', 0)) > 10
+
+        # Check if save_item meets the criteria
+        if not meets_criteria(content_item):
+            return  # If it doesn't meet the criteria, exit the function and do not save to CSV
         await self.save_data_to_json(content_item, "contents")
 
     async def store_comment(self, comment_item: Dict):

@@ -116,7 +116,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
                         note_id_list.append(note_detail.get("note_id"))
                 page += 1
                 utils.logger.info(f"[XiaoHongShuCrawler.search] Note details: {note_details}")
-                await self.batch_get_note_comments(note_id_list)
+           
 
     async def get_specified_notes(self):
         """Get the information and comments of the specified post"""
@@ -128,7 +128,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
         for note_detail in note_details:
             if note_detail is not None:
                 await xhs_store.update_xhs_note(note_detail)
-        await self.batch_get_note_comments(config.XHS_SPECIFIED_ID_LIST)
+  
 
     async def get_note_detail(self, note_id: str, semaphore: asyncio.Semaphore) -> Optional[Dict]:
         """Get note detail"""
@@ -143,26 +143,7 @@ class XiaoHongShuCrawler(AbstractCrawler):
                     f"[XiaoHongShuCrawler.get_note_detail] have not fund note detail note_id:{note_id}, err: {ex}")
                 return None
 
-    async def batch_get_note_comments(self, note_list: List[str]):
-        """Batch get note comments"""
-        utils.logger.info(
-            f"[XiaoHongShuCrawler.batch_get_note_comments] Begin batch get note comments, note list: {note_list}")
-        semaphore = asyncio.Semaphore(config.MAX_CONCURRENCY_NUM)
-        task_list: List[Task] = []
-        for note_id in note_list:
-            task = asyncio.create_task(self.get_comments(note_id, semaphore), name=note_id)
-            task_list.append(task)
-        await asyncio.gather(*task_list)
-
-    async def get_comments(self, note_id: str, semaphore: asyncio.Semaphore):
-        """Get note comments with keyword filtering and quantity limitation"""
-        async with semaphore:
-            utils.logger.info(f"[XiaoHongShuCrawler.get_comments] Begin get note id comments {note_id}")
-            await self.xhs_client.get_note_all_comments(
-                note_id=note_id,
-                crawl_interval=random.random(),
-                callback=xhs_store.batch_update_xhs_note_comments
-            )
+    
 
     @staticmethod
     def format_proxy_info(ip_proxy_info: IpInfoModel) -> Tuple[Optional[Dict], Optional[Dict]]:

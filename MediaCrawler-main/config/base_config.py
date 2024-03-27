@@ -1,6 +1,6 @@
 # 基础配置
 PLATFORM = "xhs"
-KEYWORDS = "python"
+KEYWORDS = "nike"
 LOGIN_TYPE = "qrcode"  # qrcode or phone or cookie
 COOKIES = ""
 CRAWLER_TYPE = "search"
@@ -17,8 +17,8 @@ HEADLESS = True
 # 是否保存登录状态
 SAVE_LOGIN_STATE = True
 
-# 数据保存类型选项配置,支持三种类型：csv、db、json
-SAVE_DATA_OPTION = "csv" # csv or db or json
+# 数据保存类型选项配置,支持三种类型：csv、db、json、txt
+SAVE_DATA_OPTION = "json" # csv or db or json or txt
 
 # 用户浏览器缓存的浏览器文件配置
 USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
