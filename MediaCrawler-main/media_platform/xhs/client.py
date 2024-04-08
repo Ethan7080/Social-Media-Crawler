@@ -16,7 +16,7 @@ from .help import get_search_id, sign
 class XHSClient:
     def __init__(
             self,
-            timeout=10,
+            timeout=100,
             proxies=None,
             *,
             headers: Dict[str, str],

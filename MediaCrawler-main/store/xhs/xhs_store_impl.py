@@ -20,14 +20,10 @@ from var import crawler_type_var
 class XhsTxtStoreImplement(AbstractStore):
     def __init__(self):
         self.file_path : str = "data/xhs"
-        self.post_counter = 0  # To keep track of the number of posts processed
-
     async def store_content(self, content_item: Dict):
         # Check if the like count is greater than 100 before storing
         if int(content_item.get('liked_count', 0)) > int(100):
-            self.post_counter += 1  # Increment the counter when storing content
-            formatted_content = self._format_content_item(content_item)
-            await self._write_to_file(formatted_content, 'content')
+            await self._write_to_file(self._format_content_item(content_item), 'content')
 
     async def store_comment(self, comment_item: Dict):
           # Increment the counter when storing comment
@@ -40,13 +36,10 @@ class XhsTxtStoreImplement(AbstractStore):
         full_path = f"{self.file_path}/{filename}"
         # Write the formatted data to the text file asynchronously
         async with aiofiles.open(full_path, 'a', encoding='utf-8') as file:
-            await file.write(data + '\n\n')  # Ensure each entry is separated by a new line
+            await file.write(str(data) + '\n\n')  # Ensure each entry is separated by a new line
 
     def _format_content_item(self, item: Dict) -> str:
-        # Generate a string representation of the content item
-        self.post_counter += 1
         formatted_lines = [
-            f"Post Number: {self.post_counter}",
             f"Type: {item.get('type', 'N/A')}",
             f"Title: {item.get('title', 'N/A')}",
             f"Description: {item.get('desc', 'N/A')}",

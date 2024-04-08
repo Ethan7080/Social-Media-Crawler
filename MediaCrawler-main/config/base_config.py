@@ -18,7 +18,7 @@ HEADLESS = True
 SAVE_LOGIN_STATE = True
 
 # 数据保存类型选项配置,支持三种类型：csv、db、json、txt
-SAVE_DATA_OPTION = "json" # csv or db or json or txt
+SAVE_DATA_OPTION = "txt" # csv or db or json or txt
 
 # 用户浏览器缓存的浏览器文件配置
 USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
