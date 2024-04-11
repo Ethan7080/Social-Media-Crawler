@@ -10,13 +10,6 @@ Currently, it can capture videos, pictures, comments, likes, reposts and other i
 Principle: Use [playwright](https://playwright.dev/) to build a bridge, retain the contextual browser environment after successful login, and obtain some encryption parameters by executing JS expressions
 By using this method, there is no need to reproduce the core encryption JS code, and the difficulty of reverse engineering is greatly reduced.
 
-Reptile technology exchange group: [949715256](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=NFz-oY7Pek3gpG5zbLJFHARlB8lKL94f&authKey=FlxIQK99Uu90wddNV5W%2FBga6T6lXU5BRqyTTc26f2P2Z K5OW%2BDhHp7MwviX%2BbrPa&noverify=0&group_code=949715256), also welcome Everyone contributes code and submits PR
-
-
-The IP proxy currently used by the crawler: <a href="https://www.jisuhttp.com/?pl=mAKphQ&plan=ZY&kd=Yang">Extremely fast HTTP proxy</a> New users can receive up to 12,000 IP for registration and certification, 0 yuan Trial<br>
-<a href="https://www.jisuhttp.com/?pl=mAKphQ&plan=ZY&kd=Yang" target="_blank"><img src="https://s2.loli.net/2023/11/30 /RapQtL8A2w6TGfj.png" alt="Extremely fast HTTP proxy-official website picture"></a>
-
-
 ## function list
 | Platform | Cookie login | QR code login | Mobile phone number login | Keyword search | Specified video/post ID crawling | Login status cache | Data saving | IP proxy pool | Slider verification code |
 |:---:|:----------:|:------:|:------:|:------:|:------ -------:|:------:|:----:|:------:|:-----:|
@@ -90,42 +83,3 @@ The IP proxy currently used by the crawler: <a href="https://www.jisuhttp.com/?p
 ## Mobile phone number login instructions
 ➡️➡️➡️ [Mobile phone number login instructions](docs/Mobile phone number login instructions.md)
 
-## Reward
-
-If you think the project is good, you can reward it. Your support is my biggest motivation!
-
-You can note your name when tipping, and I will add you to the tipping list.
-<p>
-   <img alt="Reward-WeChat" src="static/images/wechat_pay.jpeg" style="width: 200px;margin-right: 140px;" />
-   <img alt="Reward-Alipay" src="static/images/zfb_pay.jpeg" style="width: 200px" />
-</p>
-
-## Donation information
-
-PS: If you are making a reward, please note the donor. If there is any omission, please contact me to add it (sometimes there may be too much information and it may be missed, I am very sorry)
-
-| Donor | Donation amount | Donation date |
-|---------|------|------------|
-| He* | 100 yuan | 2024-01-21 |
-| allen | 20 yuan | 2024-01-10 |
-| llllll | 20 yuan | 2024-01-07 |
-| Kwong*Yuan | 20 yuan | 2023-12-29 |
-| 50chen | 50 yuan | 2023-12-22 |
-| xiongot | 20 yuan | 2023-12-17 |
-| atom.hu | 20 yuan | 2023-12-16 |
-| Yidu | 20 yuan | 2023-12-01 |
-| Fall | 50 yuan | 2023-11-08 |
-
-## star trend chart
-- If this project is helpful to you, star it ❤️❤️❤️
-
-[![Star History Chart](https://api.star-history.com/svg?repos=NanmiCoder/MediaCrawler&type=Date)](https://star-history.com/#NanmiCoder/MediaCrawler&Date)
-
-
-
-
-## refer to
-
-- xhs client [ReaJason’s xhs repository](https://github.com/ReaJason/xhs)
-- SMS forwarding [reference warehouse](https://github.com/pppscn/SmsForwarder)
-- Intranet penetration tool [ngrok](https://ngrok.com/docs/)

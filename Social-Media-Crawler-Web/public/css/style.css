@@ -1,0 +1,100 @@
+/* style.css */
+.google-search-input,
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  outline: none;
+  margin: 0;
+}
+
+.google-search-input {
+  flex-grow: 1; /* Allows input to fill the available space */
+  margin-right: 8px; /* Adds some space between the input and the button */
+}
+
+.submit-button {
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+  background-color: #4285f4; /* Google's blue color */
+  color: white;
+  border-color: #4285f4; /* Same as the background for a seamless look */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #2354a3; /* Slightly darker blue on hover */
+  border-color: #2354a3;
+}
+
+/* Align the form contents */
+#prompt {
+  display: flex; /* Use flexbox to align the children inline */
+  justify-content: center; /* Center the children horizontally */
+  align-items: center; /* Center the children vertically */
+  gap: 10px; /* Add space between the form elements */
+}
+
+/* Optional: Style the h1 tag */
+h1 {
+  text-align: center; /* Center the heading text */
+  margin-bottom: 20px; /* Add some space below the heading */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif; 
+}
+.loading-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .loading-screen h1 {
+    margin-bottom: 16px;
+  }
+  
+  .loading-screen .loading-text {
+    font-size: 24px;
+    margin-bottom: 32px;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .loading-screen .submit-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #f44336;
+    border-color: #f44336;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .loading-screen .submit-button:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+  }
+  
+  /* Style the form within the loading screen to remove any default browser styles */
+  .loading-screen form {
+    margin: 0;
+  }

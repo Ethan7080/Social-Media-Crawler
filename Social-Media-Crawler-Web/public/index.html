@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+        <title>Social Media Crawler</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var form = document.getElementById('prompt');
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevents the form from submitting the traditional way
+                    var input = document.querySelector('.google-search-input').value;
+
+                    // Here you could add code to validate the input
+
+                    fetch('/run-script', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ prompt: input })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Here you could redirect to the loading page or handle the response
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Social Media Crawler</h1>
+        <form id="prompt">
+            <input class="google-search-input" type="text" placeholder="Your Prompt Here">
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+    </body>
+</html>
