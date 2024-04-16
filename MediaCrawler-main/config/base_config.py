@@ -17,8 +17,8 @@ HEADLESS = True
 # 是否保存登录状态
 SAVE_LOGIN_STATE = True
 
-# 数据保存类型选项配置,支持三种类型：csv、db、json、txt
-SAVE_DATA_OPTION = "txt" # csv or db or json or txt
+# 数据保存类型选项配置,支持三种类型：csv、db、json、txt option available for xhs
+SAVE_DATA_OPTION = "txt" # csv or db or json or txt option available for xhs
 
 # 用户浏览器缓存的浏览器文件配置
 USER_DATA_DIR = "%s_user_data_dir"  # %s will be replaced by platform name
@@ -28,6 +28,8 @@ CRAWLER_MAX_NOTES_COUNT = 20
 
 # 并发爬虫数量控制
 MAX_CONCURRENCY_NUM = 4
+
+
 
 
 # 评论关键词筛选(只会留下包含关键词的评论,为空不限制)
