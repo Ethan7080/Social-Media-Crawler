@@ -28,8 +28,8 @@ class XhsTxtStoreImplement(AbstractStore):
 
     async def _write_to_file(self, data: str, data_type: str):
         # Create a unique filename for each entry
-        #filename = f"{crawler_type_var.get()}_{data_type}_{utils.get_current_date()}_{KEYWORDS}.txt"
-        filename = "output.txt"
+        filename = f"{crawler_type_var.get()}_{data_type}_{utils.get_current_date()}_{KEYWORDS}.txt"
+        #filename = "output.txt"
         full_path = f"{self.file_path}/{filename}"
         # Write the formatted data to the text file asynchronously
         async with aiofiles.open(full_path, 'a', encoding='utf-8') as file:
@@ -39,14 +39,14 @@ class XhsTxtStoreImplement(AbstractStore):
         formatted_lines = [
             f"Type: {item.get('type', 'N/A')}",
             f"Title: {item.get('title', 'N/A')}",
-            f"Description: {item.get('desc', 'N/A')}",
             f"Nickname: {item.get('nickname', 'N/A')}",
             f"Liked Count: {item.get('liked_count', 'N/A')}",
             f"Collected Count: {item.get('collected_count', 'N/A')}",
             f"Comment Count: {item.get('comment_count', 'N/A')}",
             f"Share Count: {item.get('share_count', 'N/A')}",
             f"Last Modify Timestamp: {item.get('last_modify_ts', 'N/A')}",
-            f"Note URL: {item.get('note_url', 'N/A')}"
+            f"Note URL: {item.get('note_url', 'N/A')}",
+            f"Description: {item.get('desc', 'N/A')}",
         ]
         return '\n'.join(formatted_lines)
 
@@ -107,7 +107,7 @@ class XhsCsvStoreImplement(AbstractStore):
         """
         def meets_criteria(item):
             # Example criteria: Check if 'liked_count' is greater than 20 and comment_count is greater than 10
-            return int(item.get('liked_count', 0)) > 20 and int(item.get('comment_count', 0)) > 10
+            return int(item.get('liked_count', 0)) > 50 and int(item.get('comment_count', 0)) > 20
 
         # Check if save_item meets the criteria
         if not meets_criteria(content_item):
